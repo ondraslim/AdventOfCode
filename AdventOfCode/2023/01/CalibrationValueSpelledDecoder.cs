@@ -2,7 +2,7 @@
 
 namespace AdventOfCode;
 
-public class CalibrationValuesSpelledCalculator : ICalibrationValuesCalculator
+public class CalibrationValueSpelledDecoder
 {
     private static readonly Dictionary<string, int> SpelledNumbersMap = new()
     {
@@ -17,12 +17,12 @@ public class CalibrationValuesSpelledCalculator : ICalibrationValuesCalculator
         { "nine", 9 },
     };
 
-    public int GetCalibrationValuesSum(IEnumerable<string> lines)
+    public int SumDecoded(IEnumerable<string> lines)
     {
-        return lines.Select(GetCalibrationValue).Sum();
+        return lines.Select(Decode).Sum();
     }
 
-    public int GetCalibrationValue(string text)
+    public int Decode(string text)
     {
         int? firstNumber = null;
         int? lastNumber = null;

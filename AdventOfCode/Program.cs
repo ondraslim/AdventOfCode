@@ -1,5 +1,7 @@
 ﻿using AdventOfCode;
 
-var sum = CalibrationValuesRunner.Run();
 
-Console.WriteLine(sum);
+//TaskSolutionRunner.Run<CalibrationValuesSolution>();
+//TaskSolutionRunner.Run<CalibrationValuesSpelledSolution>();
+TaskSolutionRunner.Run<ElfGameValidIdSumSolution>();
+TaskSolutionRunner.Run<ElfGameMinimumCubesSolution>();

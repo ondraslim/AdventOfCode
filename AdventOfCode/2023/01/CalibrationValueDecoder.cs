@@ -2,14 +2,14 @@
 
 namespace AdventOfCode;
 
-public class CalibrationValuesCalculator : ICalibrationValuesCalculator
+public class CalibrationValueDecoder
 {
-    public int GetCalibrationValuesSum(IEnumerable<string> lines)
+    public int SumDecoded(IEnumerable<string> lines)
     {
-        return lines.Select(GetCalibrationValue).Sum();
+        return lines.Select(Decode).Sum();
     }
 
-    public int GetCalibrationValue(string text)
+    public int Decode(string text)
     {
         int? firstNumber = null;
         int? lastNumber = null;

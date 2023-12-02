@@ -3,13 +3,13 @@ using Xunit;
 
 namespace AdventOfCode.Tests;
 
-public class CalibrationValuesSpelledCalculatorTests
+public class CalibrationValueSpelledDecoderTests
 {
-    private readonly CalibrationValuesSpelledCalculator _calibrationValuesSpelledCalculator;
+    private readonly CalibrationValueSpelledDecoder _calibrationValueSpelledDecoder;
 
-    public CalibrationValuesSpelledCalculatorTests()
+    public CalibrationValueSpelledDecoderTests()
     {
-        _calibrationValuesSpelledCalculator = new CalibrationValuesSpelledCalculator();
+        _calibrationValueSpelledDecoder = new CalibrationValueSpelledDecoder();
     }
 
     [Theory]
@@ -19,9 +19,9 @@ public class CalibrationValuesSpelledCalculatorTests
     [InlineData("1a3c2asd", 12)]
     [InlineData("1", 11)]
     [InlineData("ads3dsda", 33)]
-    public void GetCalibrationValueWithDigitsTests(string input, int expectedValue)
+    public void DecodeTests(string input, int expectedValue)
     {
-        var calibrationValue = _calibrationValuesSpelledCalculator.GetCalibrationValue(input);
+        var calibrationValue = _calibrationValueSpelledDecoder.Decode(input);
 
         calibrationValue.Should().Be(expectedValue);
     }
@@ -31,7 +31,7 @@ public class CalibrationValuesSpelledCalculatorTests
     {
         var input = new[] { "12", "1abc2", "2fds6dsa" };
 
-        var calibrationValuesSum = _calibrationValuesSpelledCalculator.GetCalibrationValuesSum(input);
+        var calibrationValuesSum = _calibrationValueSpelledDecoder.SumDecoded(input);
 
         calibrationValuesSum.Should().Be(50);
     }
@@ -47,7 +47,7 @@ public class CalibrationValuesSpelledCalculatorTests
     [InlineData("1fdsninedas", 19)]
     public void GetCalibrationValueWithSpelledNumbersTests(string input, int expectedValue)
     {
-        var calibrationValue = _calibrationValuesSpelledCalculator.GetCalibrationValue(input);
+        var calibrationValue = _calibrationValueSpelledDecoder.Decode(input);
 
         calibrationValue.Should().Be(expectedValue);
     }
@@ -57,7 +57,7 @@ public class CalibrationValuesSpelledCalculatorTests
     {
         var input = new[] { "12", "1abc2", "2fds6dsa" };
 
-        var calibrationValuesSum = _calibrationValuesSpelledCalculator.GetCalibrationValuesSum(input);
+        var calibrationValuesSum = _calibrationValueSpelledDecoder.SumDecoded(input);
 
         calibrationValuesSum.Should().Be(50);
     }

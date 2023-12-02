@@ -8,12 +8,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="2023\01\input.txt" />
+        <None Remove="2023\01\input01.txt" />
+        <None Remove="2023\02\input02.txt" />
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Include="2023\01\input.txt">
+        <EmbeddedResource Include="2023\01\input01.txt">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="2023\02\input02.txt">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </EmbeddedResource>
     </ItemGroup>
 
