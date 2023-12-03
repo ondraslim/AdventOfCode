@@ -2,6 +2,19 @@
 
 public static class CollectionsExtensions
 {
+    public static bool IsIndexValid<T>(
+        this ICollection<T> collection,
+        int index)
+    {
+        return 0 <= index && index < collection.Count;
+    }
+    public static bool IsIndexValid(
+        this string text,
+        int index)
+    {
+        return 0 <= index && index < text.Length;
+    }
+
     public static bool ContainsKey<T>(
         this IDictionary<string, T> dictionary, 
         ReadOnlySpan<char> key)

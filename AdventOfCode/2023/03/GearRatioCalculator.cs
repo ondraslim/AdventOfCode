@@ -16,10 +16,7 @@ public class GearRatioCalculator
             {
                 if (line[j] is '*')
                 {
-                    if (TryGetGearRatio(schemaLines, i, j, out var number))
-                    {
-                        result += number;
-                    }
+                    result += GetGearRatio(schemaLines, i, j);
                 }
             }
         }
@@ -27,49 +24,45 @@ public class GearRatioCalculator
         return result;
     }
 
-    private bool TryGetGearRatio(string[] schemaLines, int lineIndex, int currentIndex, out int ratio)
+    private static int GetGearRatio(string[] schemaLines, int lineIndex, int currentIndex)
     {
         var adjacentNumbers = ArrayPool<int>.Shared.Rent(2);
         var foundCount = 0;
-        
-        foreach (var lineShift in Enumerable.Range(lineIndex - 1, 3).Where(i => 0 <= i && i < schemaLines.Length))
+
+        var neighboringLines = Enumerable.Range(lineIndex - 1, 3)
+            .Where(i => 0 <= i && i < schemaLines.Length)
+            .Select(i => schemaLines[i]);
+
+        foreach (var line in neighboringLines)
         {
-            var currentLine = schemaLines[lineShift].AsSpan();
             for (var i = currentIndex - 1; i <= currentIndex + 1; i++)
             {
-                if (currentLine.Length > i && i >= 0)
+                if (line.IsIndexValid(i))
                 {
-                    var character = currentLine[i];
-                    if (char.IsDigit(character))
+                    if (char.IsDigit(line[i]))
                     {
                         if (foundCount == 2)
                         {
-                            break;
+                            ArrayPool<int>.Shared.Return(adjacentNumbers);
+                            return 0;
                         }
 
-                        var adjacentNumber = GetNumber(currentLine, ref i);
+                        var adjacentNumber = GetNumber(line, ref i);
                         adjacentNumbers[foundCount] = adjacentNumber;
                         foundCount++;
                     }
                 }
             }
-
-            if (foundCount == 2)
-            {
-                break;
-            }
         }
 
         if (foundCount == 2)
         {
-            ratio = adjacentNumbers[0] * adjacentNumbers[1];
             ArrayPool<int>.Shared.Return(adjacentNumbers);
-            return true;
+            return adjacentNumbers[0] * adjacentNumbers[1];
         }
 
         ArrayPool<int>.Shared.Return(adjacentNumbers);
-        ratio = 0;
-        return false;
+        return 0;
     }
 
     private static int GetNumber(ReadOnlySpan<char> line, ref int index)
