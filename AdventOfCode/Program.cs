@@ -5,4 +5,5 @@
 //TaskSolutionRunner.Run<CalibrationValuesSpelledSolution>();
 //TaskSolutionRunner.Run<ElfGameValidIdSumSolution>();
 //TaskSolutionRunner.Run<ElfGameMinimumCubesSolution>();
-TaskSolutionRunner.Run<EnginePartsNumberSumSolution>();
+//TaskSolutionRunner.Run<EnginePartsNumberSumSolution>();
+TaskSolutionRunner.Run<EngineGearRatioSolution>();

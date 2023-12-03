@@ -3,9 +3,38 @@ using Xunit;
 
 namespace AdventOfCode.Tests;
 
+public class GearRatioCalculatorTests
+{
+    [Theory]
+    [InlineData("..12...", 0)]
+    [InlineData("..12*...", 0)]
+    [InlineData("..3*3...", 9)]
+    [InlineData("..3#3...", 0)]
+    [InlineData("..30*3...", 90)]
+    [InlineData("..3*3*3...", 18)]
+    public void EngineSchemaSameLineGearRatioTests(string schemaLine, int expectedRatio)
+    {
+        var gearRatioCalculator = new GearRatioCalculator();
+
+        var ratio = gearRatioCalculator.Calculate(new[] { schemaLine });
+
+        ratio.Should().Be(expectedRatio);
+    }
+
+    [Theory]
+    [ClassData(typeof(GearRatioTestData))]
+    public void EngineSchemaDifferentLineGearRatioTests(string[] schema, int expectedRatio)
+    {
+        var gearRatioCalculator = new GearRatioCalculator();
+
+        var ratio = gearRatioCalculator.Calculate(schema);
+
+        ratio.Should().Be(expectedRatio);
+    }
+}
+
 public class EnginePartNumbersDecoderTests
 {
-
     [Theory]
     [InlineData("..12...", 0)]
     [InlineData("1#...", 1)]
@@ -24,7 +53,7 @@ public class EnginePartNumbersDecoderTests
     }
 
     [Theory]
-    [ClassData(typeof(EngineSchemaTestData))]
+    [ClassData(typeof(EnginePartsTestData))]
     public void EngineSchemaDifferentLineAdjacentSymbolTests(string[] schema, int expectedNumber)
     {
         var enginePartsDecoder = new EnginePartsDecoder();
