@@ -1,7 +1,7 @@
 ﻿using System.Buffers;
 using AdventOfCode.Helpers;
 
-namespace AdventOfCode;
+namespace AdventOfCode.Year2023.Day03;
 
 public class GearRatioCalculator
 {

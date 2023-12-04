@@ -1,7 +1,8 @@
-﻿using FluentAssertions;
+﻿using AdventOfCode.Year2023.Day03;
+using FluentAssertions;
 using Xunit;
 
-namespace AdventOfCode.Tests;
+namespace AdventOfCode.Tests.Year2023.Day03;
 
 public class GearRatioCalculatorTests
 {

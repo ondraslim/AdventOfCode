@@ -1,6 +1,6 @@
 ﻿using AdventOfCode.Helpers;
 
-namespace AdventOfCode;
+namespace AdventOfCode.Year2023.Day02;
 
 public class ElfCubeGameValidSum
 {

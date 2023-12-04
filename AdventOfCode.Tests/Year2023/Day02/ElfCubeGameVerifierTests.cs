@@ -1,7 +1,8 @@
-﻿using FluentAssertions;
+﻿using AdventOfCode.Year2023.Day02;
+using FluentAssertions;
 using Xunit;
 
-namespace AdventOfCode.Tests;
+namespace AdventOfCode.Tests.Year2023.Day02;
 
 public class ElfCubeGameVerifierTests
 {

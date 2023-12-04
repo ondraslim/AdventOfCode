@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace AdventOfCode;
+namespace AdventOfCode.Year2023.Day01;
 
 public class CalibrationValueSpelledDecoder
 {

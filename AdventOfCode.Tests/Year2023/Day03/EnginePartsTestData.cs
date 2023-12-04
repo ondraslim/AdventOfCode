@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace AdventOfCode.Tests;
+namespace AdventOfCode.Tests.Year2023.Day03;
 
 public class GearRatioTestData : IEnumerable<object[]>
 {

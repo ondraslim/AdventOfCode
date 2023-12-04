@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode;
+﻿namespace AdventOfCode.Year2023.Day02;
 
 public static class ElfCubeGameHelper
 {

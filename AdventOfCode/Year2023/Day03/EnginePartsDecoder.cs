@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode;
+﻿namespace AdventOfCode.Year2023.Day03;
 
 public class EnginePartsDecoder
 {
