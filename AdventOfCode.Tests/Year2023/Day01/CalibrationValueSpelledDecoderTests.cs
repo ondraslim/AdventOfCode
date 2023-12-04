@@ -6,13 +6,6 @@ namespace AdventOfCode.Tests.Year2023.Day01;
 
 public class CalibrationValueSpelledDecoderTests
 {
-    private readonly CalibrationValueSpelledDecoder _calibrationValueSpelledDecoder;
-
-    public CalibrationValueSpelledDecoderTests()
-    {
-        _calibrationValueSpelledDecoder = new CalibrationValueSpelledDecoder();
-    }
-
     [Theory]
     [InlineData("12", 12)]
     [InlineData("1abc2", 12)]
@@ -22,7 +15,7 @@ public class CalibrationValueSpelledDecoderTests
     [InlineData("ads3dsda", 33)]
     public void DecodeTests(string input, int expectedValue)
     {
-        var calibrationValue = _calibrationValueSpelledDecoder.Decode(input);
+        var calibrationValue = new CalibrationValueSpelledDecoder().Decode(input);
 
         calibrationValue.Should().Be(expectedValue);
     }
@@ -32,7 +25,7 @@ public class CalibrationValueSpelledDecoderTests
     {
         var input = new[] { "12", "1abc2", "2fds6dsa" };
 
-        var calibrationValuesSum = _calibrationValueSpelledDecoder.SumDecoded(input);
+        var calibrationValuesSum = new CalibrationValueSpelledDecoder().SumDecoded(input);
 
         calibrationValuesSum.Should().Be(50);
     }
@@ -48,7 +41,7 @@ public class CalibrationValueSpelledDecoderTests
     [InlineData("1fdsninedas", 19)]
     public void GetCalibrationValueWithSpelledNumbersTests(string input, int expectedValue)
     {
-        var calibrationValue = _calibrationValueSpelledDecoder.Decode(input);
+        var calibrationValue = new CalibrationValueSpelledDecoder().Decode(input);
 
         calibrationValue.Should().Be(expectedValue);
     }
@@ -58,7 +51,7 @@ public class CalibrationValueSpelledDecoderTests
     {
         var input = new[] { "12", "1abc2", "2fds6dsa" };
 
-        var calibrationValuesSum = _calibrationValueSpelledDecoder.SumDecoded(input);
+        var calibrationValuesSum = new CalibrationValueSpelledDecoder().SumDecoded(input);
 
         calibrationValuesSum.Should().Be(50);
     }

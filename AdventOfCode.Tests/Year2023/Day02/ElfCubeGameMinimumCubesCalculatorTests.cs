@@ -19,9 +19,9 @@ public class ElfCubeGameMinimumCubesCalculatorTests
     [MemberData(nameof(TestGames))]
     public void MinimumRequiredCubeCountsTests(string gameLine, int expectedSum)
     {
-        var calculator = new ElfCubeGameMinimumCubesCalculator();
+        var sut = new ElfCubeGameMinimumCubesCalculator();
 
-        var minimumCubesProductsSum = calculator.GetMinimumCubesProduct(gameLine);
+        var minimumCubesProductsSum = sut.GetMinimumCubesProduct(gameLine);
 
         minimumCubesProductsSum.Should().Be(expectedSum);
     }
@@ -37,9 +37,10 @@ public class ElfCubeGameMinimumCubesCalculatorTests
             "Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red",
             "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green"
         };
-        var calculator = new ElfCubeGameMinimumCubesCalculator();
 
-        var minimumCubesProductsSum = calculator.GetMinimumCubesProductsSum(games);
+        var sut = new ElfCubeGameMinimumCubesCalculator();
+
+        var minimumCubesProductsSum = sut.GetMinimumCubesProductsSum(games);
 
         minimumCubesProductsSum.Should().Be(2286);
     }

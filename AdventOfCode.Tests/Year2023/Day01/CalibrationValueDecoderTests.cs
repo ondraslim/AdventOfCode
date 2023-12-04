@@ -6,13 +6,6 @@ namespace AdventOfCode.Tests.Year2023.Day01;
 
 public class CalibrationValueDecoderTests
 {
-    private readonly CalibrationValueDecoder _calibrationValueDecoder;
-
-    public CalibrationValueDecoderTests()
-    {
-        _calibrationValueDecoder = new CalibrationValueDecoder();
-    }
-
     [Theory]
     [InlineData("12", 12)]
     [InlineData("1abc2", 12)]
@@ -22,7 +15,9 @@ public class CalibrationValueDecoderTests
     [InlineData("ads3dsda", 33)]
     public void Decode(string input, int expectedValue)
     {
-        var calibrationValue = _calibrationValueDecoder.Decode(input);
+        var sut = new CalibrationValueDecoder();
+
+        var calibrationValue = sut.Decode(input);
         
         calibrationValue.Should().Be(expectedValue);
     }
@@ -30,9 +25,10 @@ public class CalibrationValueDecoderTests
     [Fact]
     public void SumDecoded()
     {
+        var sut = new CalibrationValueDecoder();
         var input = new[] { "12", "1abc2", "2fds6dsa" };
 
-        var calibrationValuesSum = _calibrationValueDecoder.SumDecoded(input);
+        var calibrationValuesSum = sut.SumDecoded(input);
 
         calibrationValuesSum.Should().Be(50);
     }
