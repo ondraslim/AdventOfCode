@@ -2,42 +2,55 @@
 
 namespace AdventOfCode.Year2023.Day05;
 
-public class SeedLocationCalculator
+public class SeedRangedLocationCalculator
 {
-    public long GetSeedWithClosestLocation(string[] lines)
+    public long GetSeedsRangedWithClosestLocation(string[] lines)
     {
         var seeds = GetSeeds(lines[0]);
-        return GetSeedWithClosestLocation(lines, seeds);
+        var seedsRanged = GetSeedRanges(seeds);
+
+        return GetSeedWithClosestLocation(lines, seedsRanged);
     }
 
-    private static long GetSeedWithClosestLocation(string[] lines, IEnumerable<long> seeds)
+    private static IEnumerable<(long Start, long End)> GetSeedRanges(IEnumerable<long> seeds)
+    {
+        return seeds.Chunk(2).Select(pair => (pair[0], pair[0] + pair[1] - 1));
+    }
+
+    private static long GetSeedWithClosestLocation(string[] lines, IEnumerable<(long Start, long End)> seedRanges)
     {
         var maps = GetMaps(lines[2..]);
 
-        return seeds.Aggregate(long.MaxValue, (currentClosest, seed) =>
+        return seedRanges.Aggregate(long.MaxValue, (currentClosest, seedRange) =>
         {
-            var seedLocation = GetFinalSeedLocation(seed, maps);
-             return seedLocation < currentClosest ? seedLocation : currentClosest;
+            var location = GetFinalSeedLocation(seedRange, maps).Start;
+            return location < currentClosest ? location : currentClosest;
         });
     }
 
-    private static long GetFinalSeedLocation(long seed, IEnumerable<SeedMap> maps)
+    private static (long Start, long Length) GetFinalSeedLocation((long Start, long End) seedRange, IEnumerable<SeedMap> maps)
     {
-        return maps.Aggregate(seed, GetNextDestination);
+        return maps.Aggregate(seedRange, GetNextDestination);
     }
 
-    private static long GetNextDestination(long seed, SeedMap map)
+    private static (long Start, long Length) GetNextDestination((long Start, long End) seedRange, SeedMap map)
     {
         foreach (var configuration in map.Configurations)
         {
-            if (configuration.Source <= seed && seed < configuration.Source + configuration.Range)
+            var configurationSourceEnd = configuration.Source + configuration.Range;
+            var overlapStart = Math.Max(seedRange.Start, configuration.Source);
+            var overlapEnd = Math.Min(seedRange.End, configurationSourceEnd);
+            if (overlapStart <= overlapEnd)
             {
-                var offset = seed - configuration.Source;
-                return configuration.Destination + offset;
+                var offset = overlapStart - configuration.Source;
+                var remainingLength = overlapEnd - overlapStart;
+                var newStart = configuration.Destination + offset;
+                var newRange = (newStart, newStart + remainingLength);
+                return newRange;
             }
         }
 
-        return seed;
+        return seedRange;
     }
 
     private static IList<SeedMap> GetMaps(IEnumerable<string> lines)

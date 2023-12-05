@@ -6,7 +6,9 @@ public class ScratchCardScoreSolution : ITaskSolution
     {
         var cards = InputData.Data.Split(Environment.NewLine);
 
-        Console.WriteLine(new ScratchcardCalculator().CalculateScore(cards));
-        Console.WriteLine(new ScratchcardCalculator().CalculateCopyCount(cards));
+        var scratchCardCalculator = new ScratchcardCalculator();
+
+        Console.WriteLine(scratchCardCalculator.CalculateScore(cards));
+        Console.WriteLine(scratchCardCalculator.CalculateCopyCount(cards));
     }
 }

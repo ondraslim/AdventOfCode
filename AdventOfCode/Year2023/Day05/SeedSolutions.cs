@@ -6,6 +6,7 @@ public class SeedSolutions : ITaskSolution
     {
         var lines = InputData.Data.Split(Environment.NewLine);
 
-        Console.WriteLine(new SeedLocationCalculator().GetSeedWithClosesLocation(lines));
+        Console.WriteLine(new SeedLocationCalculator().GetSeedWithClosestLocation(lines));
+        Console.WriteLine(new SeedRangedLocationCalculator().GetSeedsRangedWithClosestLocation(lines));
     }
 }

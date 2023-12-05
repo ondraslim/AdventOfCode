@@ -10,7 +10,6 @@ using AdventOfCode.Year2023.Day05;
 //TaskSolutionRunner.Run<CalibrationValuesSpelledSolution>();
 //TaskSolutionRunner.Run<ElfGameValidIdSumSolution>();
 //TaskSolutionRunner.Run<ElfGameMinimumCubesSolution>();
-//TaskSolutionRunner.Run<EnginePartsNumberSumSolution>();
-//TaskSolutionRunner.Run<EngineGearRatioSolution>();
+//TaskSolutionRunner.Run<EnginePartsTaskSolutions>();
 //TaskSolutionRunner.Run<ScratchCardScoreSolution>();
 TaskSolutionRunner.Run<SeedSolutions>();
