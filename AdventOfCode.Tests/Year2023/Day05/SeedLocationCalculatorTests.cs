@@ -29,44 +29,79 @@ public class SeedLocationCalculatorTests
         location.Should().Be(expectedLocation);
     }
 
-    [Fact]
-    public void SeedRangedLocationTestSimple()
+    [Theory]
+    [InlineData(
+        """
+        seeds: 12 5
+
+        map-1:
+        50 12 5
+        """, 
+        50)]
+    [InlineData(
+        """
+        seeds: 13 5
+        
+        map-1:
+        50 12 5
+        """,
+        51)]
+    [InlineData(
+        """
+        seeds: 1 5
+        
+        map-1:
+        50 5 5
+        """,
+        1)]
+    [InlineData(
+        """
+        seeds: 1 5
+        
+        map-1:
+        50 5 5
+        """,
+        1)]
+    [InlineData(
+        """
+        seeds: 1 10
+        
+        map-1:
+        50 3 5
+        """,
+        1)]
+    public void SeedRangedLocationTestSimple(string input, long expectedLocation)
     {
-        var input =
-            """
-            seeds: 12 5
-
-            map-1:
-            50 12 5
-            """;
-
         var lines = input.Split(Environment.NewLine);
 
         var sut = new SeedRangedLocationCalculator();
 
         var location = sut.GetSeedsRangedWithClosestLocation(lines);
         
-        location.Should().Be(50);
+        location.Should().Be(expectedLocation);
     }
 
-    [Fact]
-    public void SeedRangedLocationTestSimple2()
+
+    [Theory]
+    [InlineData(
+        """
+        seeds: 1 20
+        
+        map-1:
+        50 1 3
+        10 8 3
+        70 15 3
+        """,
+        4)]
+    public void SeedRangedLocationSpreadRangeTest(string input, long expectedLocation)
     {
-        var input =
-            """
-            seeds: 13 5
-
-            map-1:
-            50 12 5
-            """;
-
         var lines = input.Split(Environment.NewLine);
 
         var sut = new SeedRangedLocationCalculator();
 
         var location = sut.GetSeedsRangedWithClosestLocation(lines);
         
-        location.Should().Be(51);
+        location.Should().Be(expectedLocation);
     }
 
     [Fact]

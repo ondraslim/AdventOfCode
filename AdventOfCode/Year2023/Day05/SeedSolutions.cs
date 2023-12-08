@@ -7,7 +7,7 @@ public class SeedSolutions : ITaskSolution
         var lines = InputData.Data.Split(Environment.NewLine);
 
         //Console.WriteLine(new SeedLocationCalculator().GetSeedWithClosestLocation(lines));
-        //Console.WriteLine(new SeedRangedLocationCalculator().GetSeedsRangedWithClosestLocation(lines));
+        Console.WriteLine(new SeedRangedLocationCalculator().GetSeedsRangedWithClosestLocation(lines));
 
         var input =
             """
@@ -48,6 +48,6 @@ public class SeedSolutions : ITaskSolution
 
 
         lines = input.Split(Environment.NewLine);
-        Console.WriteLine(new SeedRangedLocationCalculator().GetSeedsRangedWithClosestLocation(lines));
+        //Console.WriteLine(new SeedRangedLocationCalculator().GetSeedsRangedWithClosestLocation(lines));
     }
 }

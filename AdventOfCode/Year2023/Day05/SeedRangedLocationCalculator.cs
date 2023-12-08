@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using AdventOfCode.Helpers;
+﻿using AdventOfCode.Helpers;
 
 namespace AdventOfCode.Year2023.Day05;
 
@@ -24,9 +23,7 @@ public class SeedRangedLocationCalculator
 
         return seedRanges.Aggregate(long.MaxValue, (currentClosest, seedRange) =>
         {
-            Console.WriteLine($"Seed {seedRange}");
             var location = GetFinalSeedLocation(seedRange, maps);
-            Console.WriteLine("----------------------------------------------------");
             return location < currentClosest ? location : currentClosest;
         });
     }
@@ -37,9 +34,6 @@ public class SeedRangedLocationCalculator
         var newSeeds  = new List<(long Start, long End)>();
         foreach (var map in maps)
         {
-            Console.WriteLine();
-            Console.WriteLine($"Seeds {string.Join(",", seeds)}");
-            Console.WriteLine($"Proceeding to {map}");
             newSeeds.Clear();
             foreach (var seed in seeds)
             {
@@ -53,28 +47,57 @@ public class SeedRangedLocationCalculator
         return seeds.Min(s => s.Start);
     }
 
-    private static List<(long Start, long End)> GetNextDestination((long Start, long End) seedRange, SeedMap map)
+    private static IEnumerable<(long Start, long End)> GetNextDestination((long Start, long End) seedRange, SeedMap map)
     {
-        var result = new List<(long Start, long End)>();
+        var rangeShifts = GetSeedRangeShifts(seedRange, map);
+        var shiftedRanges = rangeShifts.Select(r => (r.Start + r.Change, r.End + r.Change));
+        
+        return shiftedRanges;
+    }
 
-        foreach (var configuration in map.Configurations)
+    private static IEnumerable<(long Start, long End, long Change)> GetSeedRangeShifts((long Start, long End) seedRange, SeedMap map)
+    {
+        var queue = new Queue<(long Start, long End)>();
+        queue.Enqueue(seedRange);
+        
+        var result = new List<(long Start, long End, long Change)>();
+
+        while (queue.Any())
         {
-            var overlapStart = Math.Max(seedRange.Start, configuration.Start);
-            var overlapEnd = Math.Min(seedRange.End, configuration.End);
-            if (overlapStart <= overlapEnd)
+            seedRange = queue.Dequeue();
+            var foundMatch = false;
+
+            foreach (var configuration in map.Configurations)
             {
-                var remainingLength = overlapEnd - overlapStart;
-                var destination = seedRange.Start + configuration.Change;
-                var newRange = (destination, destination + remainingLength);
-                Console.WriteLine($"{seedRange} + {configuration} -> {newRange}");
-                result.Add(newRange);
-            }
-        }
+                var overlapStart = Math.Max(seedRange.Start, configuration.Start);
+                var overlapEnd = Math.Min(seedRange.End, configuration.End);
 
-        if (result.Count is 0)
-        {
-            Console.WriteLine($"No match {seedRange} in {map}");
-            result.Add(seedRange);
+                if (overlapStart <= overlapEnd)
+                {
+                    var newRange = (overlapStart, End: overlapEnd, configuration.Change);
+                    result.Add(newRange);
+                    foundMatch = true;
+
+                    var unmatchedStartNumbers = (overlapStart - seedRange.Start) - 1;
+                    if (unmatchedStartNumbers > 0)
+                    {
+                        result.Add((seedRange.Start, seedRange.Start + unmatchedStartNumbers, 0));
+                    }
+
+                    var unmatchedEndNumbers = (seedRange.End - overlapEnd) - 1;
+                    if (unmatchedEndNumbers > 0)
+                    {
+                        queue.Enqueue((seedRange.End - unmatchedEndNumbers, seedRange.End));
+                    }
+
+                    break;
+                }
+            }
+
+            if (!foundMatch)
+            {
+                result.Add((seedRange.Start, seedRange.End, 0));
+            }
         }
 
         return result;
@@ -99,6 +122,7 @@ public class SeedRangedLocationCalculator
             {
                 var configuration = GetConfiguration(line);
                 maps.Last().Configurations.Add(configuration);
+                maps.Last().Configurations.Sort((a, b) => a.Start.CompareTo(b.Start));
             }
         }
 
@@ -118,7 +142,7 @@ public class SeedRangedLocationCalculator
         var numbers = GetNumbers(line);
         return new Configuration(
             numbers[1],
-            numbers[1] + numbers[2],
+            numbers[1] + numbers[2] - 1,
             numbers[0] - numbers[1]);
     }
 
@@ -137,7 +161,7 @@ public class SeedRangedLocationCalculator
     }
 
     private readonly record struct SeedMap(
-        IList<Configuration> Configurations)
+        List<Configuration> Configurations)
     {
         public override string ToString() 
             => string.Join(", ", Configurations.Select(c => c.ToString()));
