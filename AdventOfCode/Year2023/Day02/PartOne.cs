@@ -2,25 +2,25 @@
 
 namespace AdventOfCode.Year2023.Day02;
 
-public class ElfCubeGameValidSum
+public class PartOne
 {
     private readonly IDictionary<string, int> _bagCubeConfiguration;
 
-    public ElfCubeGameValidSum(IDictionary<string, int> bagCubeConfiguration)
+    public PartOne(IDictionary<string, int> bagCubeConfiguration)
     {
         _bagCubeConfiguration = bagCubeConfiguration;
     }
 
-    public int GetValidGameIdSum(IEnumerable<string> games)
+    public int Run(IEnumerable<string> games)
     {
         return games.Where(IsValidGame).Select(GetGameIdNumber).Sum();
     }
 
     public bool IsValidGame(string game)
     {
-        var gameData = ElfCubeGameHelper.GetGameData(game);
+        var gameData = Helpers.GetGameData(game);
 
-        foreach (var gameSet in gameData.SplitFast(ElfCubeGameHelper.GameSetDelimiter))
+        foreach (var gameSet in gameData.SplitFast(Helpers.GameSetDelimiter))
         {
             if (!IsValidSet(gameSet))
             {
@@ -33,11 +33,11 @@ public class ElfCubeGameValidSum
 
     private bool IsValidSet(ReadOnlySpan<char> gameSet)
     {
-        foreach (var cubePull in gameSet.SplitFast(ElfCubeGameHelper.SetColorDelimiter))
+        foreach (var cubePull in gameSet.SplitFast(Helpers.SetColorDelimiter))
         {
             var trimmed = cubePull.Trim();
-            var color = ElfCubeGameHelper.GetCubeColor(trimmed);
-            var number = ElfCubeGameHelper.GetCubeCount(trimmed);
+            var color = Helpers.GetCubeColor(trimmed);
+            var number = Helpers.GetCubeCount(trimmed);
 
             if (_bagCubeConfiguration.TryGetValue(color, out var maxAllowedCount)
                 && number > maxAllowedCount)
@@ -51,7 +51,7 @@ public class ElfCubeGameValidSum
 
     private static int GetGameIdNumber(string gameLine)
     {
-        var gameId = gameLine.AsSpan()[..gameLine.IndexOf(ElfCubeGameHelper.GameNameAndDataDelimiter)];
+        var gameId = gameLine.AsSpan()[..gameLine.IndexOf(Helpers.GameNameAndDataDelimiter)];
         
         var idStartIndex = gameId.LastIndexOf(' ') + 1;
         var id = gameId[idStartIndex..];

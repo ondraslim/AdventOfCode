@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AdventOfCode.Tests.Year2023.Day01;
 
-public class CalibrationValueDecoderTests
+public class PartOneTests
 {
     [Theory]
     [InlineData("12", 12)]
@@ -15,9 +15,9 @@ public class CalibrationValueDecoderTests
     [InlineData("ads3dsda", 33)]
     public void Decode(string input, int expectedValue)
     {
-        var sut = new CalibrationValueDecoder();
+        var sut = new PartOne();
 
-        var calibrationValue = sut.Decode(input);
+        var calibrationValue = sut.Run(input);
         
         calibrationValue.Should().Be(expectedValue);
     }
@@ -25,10 +25,10 @@ public class CalibrationValueDecoderTests
     [Fact]
     public void SumDecoded()
     {
-        var sut = new CalibrationValueDecoder();
+        var sut = new PartOne();
         var input = new[] { "12", "1abc2", "2fds6dsa" };
 
-        var calibrationValuesSum = sut.SumDecoded(input);
+        var calibrationValuesSum = sut.Run(input);
 
         calibrationValuesSum.Should().Be(50);
     }

@@ -2,28 +2,28 @@
 
 namespace AdventOfCode.Year2023.Day02;
 
-public class ElfCubeGameMinimumCubesCalculator
+public class PartTwo
 {
-    public int GetMinimumCubesProductsSum(IEnumerable<string> games)
+    public int Run(IEnumerable<string> games)
     {
         return games.Select(GetMinimumCubesProduct).Sum();
     }
 
     public int GetMinimumCubesProduct(string game)
     {
-        var gameData = ElfCubeGameHelper.GetGameData(game);
+        var gameData = Helpers.GetGameData(game);
 
         var requiredRedCount = 0;
         var requiredGreenCount = 0;
         var requiredBlueCount = 0;
 
-        foreach (var gameSet in gameData.SplitFast(ElfCubeGameHelper.GameSetDelimiter))
+        foreach (var gameSet in gameData.SplitFast(Helpers.GameSetDelimiter))
         {
-            foreach (var cubePull in gameSet.SplitFast(ElfCubeGameHelper.SetColorDelimiter))
+            foreach (var cubePull in gameSet.SplitFast(Helpers.SetColorDelimiter))
             {
                 var trimmed = cubePull.Trim();
-                var color = ElfCubeGameHelper.GetCubeColor(trimmed);
-                var number = ElfCubeGameHelper.GetCubeCount(trimmed);
+                var color = Helpers.GetCubeColor(trimmed);
+                var number = Helpers.GetCubeCount(trimmed);
 
                 UpdateRequiredCubeCount(
                     color, 

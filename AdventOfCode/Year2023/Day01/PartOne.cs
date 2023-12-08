@@ -2,14 +2,14 @@
 
 namespace AdventOfCode.Year2023.Day01;
 
-public class CalibrationValueDecoder
+public class PartOne
 {
-    public int SumDecoded(IEnumerable<string> lines)
+    public int Run(IEnumerable<string> lines)
     {
-        return lines.Select(Decode).Sum();
+        return lines.Select(Run).Sum();
     }
 
-    public int Decode(string text)
+    public int Run(string text)
     {
         int? firstNumber = null;
         int? lastNumber = null;

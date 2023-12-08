@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AdventOfCode.Tests.Year2023.Day02;
 
-public class ElfCubeGameMinimumCubesCalculatorTests
+public class PartTwoTests
 {
     public static IEnumerable<object[]> TestGames = new List<object[]>
     {
@@ -19,7 +19,7 @@ public class ElfCubeGameMinimumCubesCalculatorTests
     [MemberData(nameof(TestGames))]
     public void MinimumRequiredCubeCountsTests(string gameLine, int expectedSum)
     {
-        var sut = new ElfCubeGameMinimumCubesCalculator();
+        var sut = new PartTwo();
 
         var minimumCubesProductsSum = sut.GetMinimumCubesProduct(gameLine);
 
@@ -38,9 +38,9 @@ public class ElfCubeGameMinimumCubesCalculatorTests
             "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green"
         };
 
-        var sut = new ElfCubeGameMinimumCubesCalculator();
+        var sut = new PartTwo();
 
-        var minimumCubesProductsSum = sut.GetMinimumCubesProductsSum(games);
+        var minimumCubesProductsSum = sut.Run(games);
 
         minimumCubesProductsSum.Should().Be(2286);
     }

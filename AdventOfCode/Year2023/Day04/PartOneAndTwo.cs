@@ -2,14 +2,14 @@
 
 namespace AdventOfCode.Year2023.Day04;
 
-public class ScratchcardCalculator
+public class PartOneAndTwo
 {
-    public int CalculateScore(string[] cards)
+    public int RunPartOne(string[] cards)
     {
         return cards.Select(CalculateScore).Sum();
     }
 
-    public int CalculateCopyCount(string[] cards)
+    public int RunPartTwo(string[] cards)
     { 
         var cardCopies = cards.Select(c => (Card: c, CopyCount: 1)).ToList();
         

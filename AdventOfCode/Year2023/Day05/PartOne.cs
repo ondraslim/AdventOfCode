@@ -2,9 +2,9 @@
 
 namespace AdventOfCode.Year2023.Day05;
 
-public class SeedLocationCalculator
+public class PartOne
 {
-    public long GetSeedWithClosestLocation(string[] lines)
+    public long Run(string[] lines)
     {
         var seeds = GetSeeds(lines[0]);
         return GetSeedWithClosestLocation(lines, seeds);

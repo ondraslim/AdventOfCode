@@ -3,9 +3,9 @@ using AdventOfCode.Helpers;
 
 namespace AdventOfCode.Year2023.Day03;
 
-public class GearRatioCalculator
+public class PartTwo
 {
-    public int Calculate(string[] schemaLines)
+    public int Run(string[] schemaLines)
     {
         var result = 0;
 

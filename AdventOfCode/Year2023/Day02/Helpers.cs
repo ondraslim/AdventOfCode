@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Year2023.Day02;
 
-public static class ElfCubeGameHelper
+public static class Helpers
 {
     public const char GameNameAndDataDelimiter = ':';
     public const string GameSetDelimiter = ";";

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AdventOfCode.Tests.Year2023.Day05;
 
-public class SeedLocationCalculatorTests
+public class PartOneAndTwoTests
 {
     [Theory]
     [InlineData(79, 81)]
@@ -22,9 +22,9 @@ public class SeedLocationCalculatorTests
             "52 50 48",
         };
 
-        var sut = new SeedLocationCalculator();
+        var sut = new PartOne();
 
-        var location = sut.GetSeedWithClosestLocation(input);
+        var location = sut.Run(input);
         
         location.Should().Be(expectedLocation);
     }
@@ -74,9 +74,9 @@ public class SeedLocationCalculatorTests
     {
         var lines = input.Split(Environment.NewLine);
 
-        var sut = new SeedRangedLocationCalculator();
+        var sut = new PartTwo();
 
-        var location = sut.GetSeedsRangedWithClosestLocation(lines);
+        var location = sut.Run(lines);
         
         location.Should().Be(expectedLocation);
     }
@@ -97,9 +97,9 @@ public class SeedLocationCalculatorTests
     {
         var lines = input.Split(Environment.NewLine);
 
-        var sut = new SeedRangedLocationCalculator();
+        var sut = new PartTwo();
 
-        var location = sut.GetSeedsRangedWithClosestLocation(lines);
+        var location = sut.Run(lines);
         
         location.Should().Be(expectedLocation);
     }
@@ -146,9 +146,9 @@ public class SeedLocationCalculatorTests
 
         var lines = input.Split(Environment.NewLine);
 
-        var sut = new SeedRangedLocationCalculator();
+        var sut = new PartTwo();
 
-        var location = sut.GetSeedsRangedWithClosestLocation(lines);
+        var location = sut.Run(lines);
         
         location.Should().Be(46);
     }

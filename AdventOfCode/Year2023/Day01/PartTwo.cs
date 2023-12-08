@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Year2023.Day01;
 
-public class CalibrationValueSpelledDecoder
+public class PartTwo
 {
     private static readonly Dictionary<string, int> SpelledNumbersMap = new()
     {
@@ -17,7 +17,7 @@ public class CalibrationValueSpelledDecoder
         { "nine", 9 },
     };
 
-    public int SumDecoded(IEnumerable<string> lines)
+    public int Run(IEnumerable<string> lines)
     {
         return lines.Select(Decode).Sum();
     }

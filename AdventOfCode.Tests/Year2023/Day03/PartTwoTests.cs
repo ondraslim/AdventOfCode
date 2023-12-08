@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AdventOfCode.Tests.Year2023.Day03;
 
-public class GearRatioCalculatorTests
+public class PartTwoTests
 {
     [Theory]
     [InlineData("..12...", 0)]
@@ -15,20 +15,20 @@ public class GearRatioCalculatorTests
     [InlineData("..3*3*3...", 18)]
     public void EngineSchemaSameLineGearRatioTests(string schemaLine, int expectedRatio)
     {
-        var sut = new GearRatioCalculator();
+        var sut = new PartTwo();
 
-        var ratio = sut.Calculate(new[] { schemaLine });
+        var ratio = sut.Run(new[] { schemaLine });
 
         ratio.Should().Be(expectedRatio);
     }
 
     [Theory]
-    [ClassData(typeof(GearRatioTestData))]
+    [ClassData(typeof(PartTwoTestData))]
     public void EngineSchemaDifferentLineGearRatioTests(string[] schema, int expectedRatio)
     {
-        var sut = new GearRatioCalculator();
+        var sut = new PartTwo();
 
-        var ratio = sut.Calculate(schema);
+        var ratio = sut.Run(schema);
 
         ratio.Should().Be(expectedRatio);
     }

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AdventOfCode.Tests.Year2023.Day02;
 
-public class ElfCubeGameVerifierTests
+public class PartOneTests
 {
     [Theory]
     [InlineData("Game 1: 3 blue, 4 red; 1 red, 2 green, 5 blue; 2 green", true)]
@@ -13,7 +13,7 @@ public class ElfCubeGameVerifierTests
     [InlineData("Game 1: 3 blue, 4 red; 11 red, 2 green, 4 blue; 11 green", false)]
     public void GameValidityTests(string gameLine, bool expectValidity)
     {
-        var elfGames = new ElfCubeGameValidSum(new Dictionary<string, int>
+        var elfGames = new PartOne(new Dictionary<string, int>
         {
             { "red", 10 },
             { "green", 10 },
@@ -37,14 +37,14 @@ public class ElfCubeGameVerifierTests
             "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green",
         };
 
-        var elfGames = new ElfCubeGameValidSum(new Dictionary<string, int>
+        var elfGames = new PartOne(new Dictionary<string, int>
         {
             { "red", 12 },
             { "green", 13 },
             { "blue", 14 },
         });
 
-        var validGameIdSum = elfGames.GetValidGameIdSum(input);
+        var validGameIdSum = elfGames.Run(input);
 
         validGameIdSum.Should().Be(8);
     }

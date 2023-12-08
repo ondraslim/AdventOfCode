@@ -1,8 +1,8 @@
 ﻿namespace AdventOfCode.Year2023.Day03;
 
-public class EnginePartsDecoder
+public class PartOne
 {
-    public int Decode(string[] schemaLines)
+    public int Run(string[] schemaLines)
     {
         var result = 0;
 

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AdventOfCode.Tests.Year2023.Day04;
 
-public class ScratchcardCalculatorTests
+public class PartOneAndTwoTests
 {
     [Theory]
     [InlineData("Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53", 8)]
@@ -15,7 +15,7 @@ public class ScratchcardCalculatorTests
     [InlineData("Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11", 0)]
     public void ScratchcardScoreTest(string card, int expectedScore)
     {
-        var sut = new ScratchcardCalculator();
+        var sut = new PartOneAndTwo();
 
         var score = sut.CalculateScore(card);
 
@@ -35,9 +35,9 @@ public class ScratchcardCalculatorTests
             "Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11",
         };
 
-        var sut = new ScratchcardCalculator();
+        var sut = new PartOneAndTwo();
 
-        var copies = sut.CalculateCopyCount(cards);
+        var copies = sut.RunPartTwo(cards);
 
         copies.Should().Be(30);
     }
