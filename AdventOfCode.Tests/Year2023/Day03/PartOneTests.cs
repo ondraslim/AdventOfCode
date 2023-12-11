@@ -27,7 +27,7 @@ public class PartOneTests
     [ClassData(typeof(PartTwoTestData))]
     public void EngineSchemaDifferentLineAdjacentSymbolTests(string[] schema, int expectedNumber)
     {
-        var enginePartsDecoder = new PartOne();
+        var enginePartsDecoder = new PartTwo();
 
         var engineParts = enginePartsDecoder.Run(schema);
 

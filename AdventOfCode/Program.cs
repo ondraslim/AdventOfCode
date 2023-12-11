@@ -5,6 +5,7 @@ using AdventOfCode.Year2023.Day03;
 using AdventOfCode.Year2023.Day04;
 using AdventOfCode.Year2023.Day05;
 using AdventOfCode.Year2023.Day08;
+using AdventOfCode.Year2023.Day09;
 
 
 TaskSolutionRunner.Run<DayOneSolution>();
@@ -13,3 +14,4 @@ TaskSolutionRunner.Run<DayThreeSolution>();
 TaskSolutionRunner.Run<DayFourSolution>();
 TaskSolutionRunner.Run<DayFiveSolution>();
 TaskSolutionRunner.Run<DayEightSolution>();
+TaskSolutionRunner.Run<DayNineSolution>();
